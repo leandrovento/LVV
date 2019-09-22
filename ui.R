@@ -8,26 +8,44 @@
 #
 
 library(shiny)
+library(shinydashboard)
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(
-
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
+shinyUI(
+    
+    dashboardPagePlus(
+        header = dashboardHeaderPlus(
+            enable_rightsidebar = TRUE,
+            rightSidebarIcon = "gears"
         ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-            plotOutput("distPlot")
-        )
+        sidebar = dashboardSidebar(),
+        body = dashboardBody(),
+        rightsidebar = rightSidebar(
+            background = "dark",
+            rightSidebarTabContent(
+                id = 1,
+                title = "Tab 1",
+                icon = "desktop",
+                active = TRUE,
+                sliderInput(
+                    "obs",
+                    "Number of observations:",
+                    min = 0, max = 1000, value = 500
+                )
+            ),
+            rightSidebarTabContent(
+                id = 2,
+                title = "Tab 2",
+                textInput("caption", "Caption", "Data Summary")
+            ),
+            rightSidebarTabContent(
+                id = 3,
+                icon = "paint-brush",
+                title = "Tab 3",
+                numericInput("obs", "Observations:", 10, min = 1, max = 100)
+            )
+        ),
+        title = "Right Sidebar"
     )
-))
+
+)
