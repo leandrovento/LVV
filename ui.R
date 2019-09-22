@@ -11,6 +11,7 @@ library(shiny)
 library(shinydashboard)
 library(shinydashboardPlus)
 library(shinyWidgets)
+library(shinyjqui)
 
 # Define UI for application that draws a histogram
 shinyUI(
@@ -61,9 +62,30 @@ shinyUI(
         sidebar = dashboardSidebar(),
         body = dashboardBody(
             
-            box(width = 4, height = "300px",
-            loadingState()
+            box(
+                "",
+                status = "warning",
+                width = NULL,
+                todoList(
+                    sortable = FALSE,
+                    todoListItem(
+                        checked = TRUE,
+                        label = "Tarefa 1",
+                        "Texto"
+                    ),
+                    todoListItem(
+                        checked = FALSE,
+                        label = "Tarefa 2",
+                        "Texto"
+                    ),
+                    todoListItem(
+                        checked = FALSE,
+                        label = "Tarefa 3",
+                        "Texto"
+                    )
+                )
             )
+            
         ),
         rightsidebar = rightSidebar(
             background = "dark",
